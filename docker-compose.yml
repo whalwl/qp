@@ -3,18 +3,18 @@ version: "3.0"
 services:
   web:
     container_name: web0
-    image: openinggame/web:v1
+    image: registry.cn-shanghai.aliyuncs.com/whhlwa/web:v1
     ports:
-      - "80:80"
+      - "8099:80"
     environment:
-      - API_HOST=<ip address>
+      - API_HOST=<你的实际IP地址>
     networks:
       - game
     depends_on:
       - server
   server:
     container_name: server0
-    image: openinggame/server:v1
+    image: registry.cn-shanghai.aliyuncs.com/whhlwa/server:v1
     ports:
       - "81:81"
     networks:
@@ -26,7 +26,7 @@ services:
       - mysql
       - mongodb
   mysql:
-    image: mysql:8.0.23
+    image: registry.cn-shanghai.aliyuncs.com/whalwl/mysql:8.0.23
     container_name: mysql0
     command:
       --default-authentication-plugin=mysql_native_password
@@ -42,7 +42,7 @@ services:
       - game
   redis0:
     container_name: redis0
-    image: redis:latest
+    image: registry.cn-shanghai.aliyuncs.com/whalwl/redis:latest
     volumes:
       - redisdata0:/data
     command: redis-server --requirepass 123456
@@ -52,7 +52,7 @@ services:
       - etcd
   redis1:
     container_name: redis1
-    image: redis:latest
+    image: registry.cn-shanghai.aliyuncs.com/whalwl/redis:latest
     volumes:
       - redisdata1:/data
     command: redis-server --requirepass 123456
@@ -62,7 +62,7 @@ services:
       - etcd
   redis2:
     container_name: redis2
-    image: redis:latest
+    image: registry.cn-shanghai.aliyuncs.com/whalwl/redis:latest
     volumes:
       - redisdata2:/data
     command: redis-server --requirepass 123456
@@ -74,13 +74,13 @@ services:
       - redis1
   zookeeper:
     container_name: zookeeper
-    image: wurstmeister/zookeeper
+    image: registry.cn-shanghai.aliyuncs.com/whhlwa/zookeeper:latest
     restart: always
     networks:
       - game
   kafka:
     container_name: kafka0
-    image: wurstmeister/kafka:2.12-2.3.0
+    image: registry.cn-shanghai.aliyuncs.com/whhlwa/kafka:2.12-2.3.0
     environment:
       - KAFKA_BROKER_ID=0
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
@@ -94,7 +94,7 @@ services:
     networks:
       - game
   etcd:
-    image: quay.io/coreos/etcd:v3.2.32
+    image: registry.cn-shanghai.aliyuncs.com/whhlwa/etcd:v3.2.32
     container_name: etcd0
     environment:
       ETCDCTL_API: 3
@@ -111,7 +111,7 @@ services:
       - game
   mongodb:
     container_name: mongodb0
-    image: mongo:4.4.4
+    image: registry.cn-shanghai.aliyuncs.com/whalwl/mongo:4.4.4
     restart: always
     volumes:
       - /data/mongo_data:/data/db
