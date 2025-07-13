@@ -5,7 +5,7 @@ services:
     container_name: web0
     image: registry.cn-shanghai.aliyuncs.com/whhlwa/web:v1
     ports:
-      - "8099:80"
+      - "80:80"
     environment:
       - API_HOST=172.16.10.16
     networks:
