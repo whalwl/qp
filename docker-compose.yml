@@ -7,7 +7,7 @@ services:
     ports:
       - "8099:80"
     environment:
-      - API_HOST=<你的实际IP地址>
+      - API_HOST=172.16.10.16
     networks:
       - game
     depends_on:
